@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  mariadb:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  trino:
+    image: trinodb/trino:435
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/v1/info || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  nats:
+    image: nats:2.10.29
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8222/varz || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      trino:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
