@@ -11,27 +11,27 @@ from src.usecase.update_role_permission import UpdateRolePermissionUsecase
 
 class RoleHandler:
     def __init__(self, create_role_uc: CreateRoleUsecase, delete_role_uc: DeleteRoleUsecase,
-                 update_role_permission: UpdateRolePermissionUsecase):
-        self.create_role_uc: CreateRoleUsecase = create_role_uc
-        self.delete_role_uc: DeleteRoleUsecase = delete_role_uc
-        self.update_role_permission: UpdateRolePermissionUsecase = update_role_permission
+                 update_role_permission_uc: UpdateRolePermissionUsecase):
+        self.create_role = create_role_uc
+        self.delete_role = delete_role_uc
+        self.update_role_permission = update_role_permission_uc
 
     def create_role(self, input: CreateRoleInput) -> Result[Role, str]:
-        result = self.create_role.execute(input.to_domain())
+        result = self.create_role.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:
             return Err(result.unwrap_err())
 
     def delete_role(self, input: DeleteRoleInput) -> Result[Role, str]:
-        result = self.delete_role_uc.execute(input.to_domain())
+        result = self.delete_role.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:
             return Err(result.unwrap_err())
 
     def update_role_permission(self, input: UpdateRolePermissionInput) -> Result[Role, str]:
-        result = self.update_role_permission.execute(input.to_domain())
+        result = self.update_role_permission.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:

@@ -8,4 +8,4 @@ def dedupe(items: list[int]) -> list[int]:
 
 @dataclasses
 class RegionInput:
-    region: str
+    region: str = "HQ"

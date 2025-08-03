@@ -17,21 +17,21 @@ class UserHandler:
         self.update_user_uc = update_user_uc
 
     def create_user(self, input: CreateUserInput) -> Result[User, str]:
-        result = self.create_user_uc.execute(input.to_domain())
+        result = self.create_user_uc.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:
             return Err(result.unwrap_err())
 
     def delete_user(self, input: DeleteUserInput) -> Result[User, str]:
-        result = self.delete_user_uc.execute(input.to_domain())
+        result = self.delete_user_uc.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:
             return Err(result.unwrap_err())
 
     def update_user_role(self, input: UpdateUserRoleInput) -> Result[User, str]:
-        result = self.update_user_uc.execute(input.to_domain())
+        result = self.update_user_uc.execute(input=input.to_domain(), region=input.region)
         if result.is_ok():
             return result
         else:
