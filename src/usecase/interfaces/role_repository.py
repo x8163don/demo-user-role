@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from result import Result
 
-from domain.aggregates.role import Role
+from src.domain.aggregates.role import Role
 
 
 class RoleRepository(ABC):
