@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List
 
 from src.application.input.base import dedupe, RegionInput
 from src.domain.aggregates.user import User
