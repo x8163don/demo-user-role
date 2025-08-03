@@ -7,6 +7,5 @@ class User:
         self.account = account
         self.roles = roles
 
-
     def update_role(self, roles: list[Role]):
         self.roles = roles

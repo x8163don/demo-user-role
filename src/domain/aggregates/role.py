@@ -9,6 +9,6 @@ class Role:
         self.data_subjects = data_subjects
         self.tables = tables
 
-    def update_permission(self,data_subjects: list[DataSubject], tables: list[Table]):
+    def update_permission(self, data_subjects: list[DataSubject], tables: list[Table]):
         self.data_subjects = data_subjects
         self.tables = tables
